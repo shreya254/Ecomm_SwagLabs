@@ -1,0 +1,37 @@
+name: Daily Cypress Run
+
+on:
+  schedule:
+    - cron: '30 9 * * *'  # Runs at 3 PM IST
+  workflow_dispatch:
+
+jobs:
+  run-cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npm run sanity-suite  # Replace with your actual test script
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-report
+          path: cypress/reports/index.html
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-videos
+          path: cypress/videos
