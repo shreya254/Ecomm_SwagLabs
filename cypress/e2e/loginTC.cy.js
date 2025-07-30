@@ -8,8 +8,13 @@ describe('Login tests',()=>{
         LoginPage.login('standard_user','secret_sauce')
         cy.url().should('include','/inventory.html')
     })
-    it('Login with invalid credentials',()=>{
+    it('Login with locked credentials',()=>{
         LoginPage.login('locked_out_user','secret_sauce')
-        cy.get('[data-test="error"]').should('be.visible')
+        cy.get('[data-test="error"]').should('contain',"Epic sadface: Sorry, this user has been locked out.")
+    })
+    it('Login with invalid password',()=>{
+        LoginPage.login('standard_user', "Qwerty2123")
+        cy.get('[data-test="error"]').should('contain',"Epic sadface: Username and password do not match any user in this service")
+    
     })
 })
