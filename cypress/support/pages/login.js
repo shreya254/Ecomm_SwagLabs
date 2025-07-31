@@ -12,8 +12,12 @@ class LoginPage{
         return cy.get('#login-button')
     }
     login(username,password){
-        this.getUsername().type(username)
-        this.getPassword().type(password)
+        if(username){
+            this.getUsername().type(username)
+        }
+        if(password){
+            this.getPassword().type(password)
+        }
         this.getLoginbutton().click()
     }
 }
