@@ -23,3 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import LoginPage from './pages/login'
+
+
+Cypress.Commands.add('loginAs',()=>{
+    cy.fixture("users").then(u=>{
+        const{username,password}=u.standard
+        LoginPage.visit()
+        LoginPage.login(username,password)
+    })
+})

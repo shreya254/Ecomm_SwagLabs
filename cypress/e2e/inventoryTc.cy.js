@@ -2,10 +2,10 @@ import LoginPage from '../support/pages/login'
 import inventoryPage from '../support/pages/inventory'
 
 
+
 describe('inventory page testcases',()=>{
     beforeEach(()=>{
-        LoginPage.visit()
-        LoginPage.login('standard_user','secret_sauce')
+        cy.loginAs()
     })
     it('should display 6 products',()=>{
         inventoryPage.getInventoryItem().should('have.length',6)
