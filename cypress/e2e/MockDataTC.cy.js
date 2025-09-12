@@ -13,12 +13,8 @@ describe('MockData',()=>{
         "book_name": "RestAssured with Java",
         "isbn": "LSA",
         "aisle": "2303"
-    },
-    {
-        "book_name": "RestAssured with Java",
-        "isbn": "LSA",
-        "aisle": "2303"
     }
+    
         ]
         }).as('bookretrivals')
         cy.contains('button', ' Virtual Library ').click()
@@ -26,4 +22,25 @@ describe('MockData',()=>{
         cy.get('p').should('have.text',"Oops only 1 Book available")
 
     })
-})
+    it("security check",()=>{
+        cy.visit("https://rahulshettyacademy.com/angularAppdemo/")
+        cy.intercept(
+            'GET',
+            'https://rahulshettyacademy.com/Library/GetBook.php?AuthorName=shetty',
+            (req)=>{
+                req.url="https://rahulshettyacademy.com/Library/GetBook.php?AuthorName=malhotra"
+                req.continue((res)=>{
+                expect(res.statusCode).to.equal(403)
+            })
+        })
+            .as("dummyURL")
+            cy.contains('button', ' Virtual Library ').click()
+            cy.wait('@dummyURL')
+
+            
+            
+         })
+
+
+        
+    })
