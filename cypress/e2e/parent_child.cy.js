@@ -16,13 +16,16 @@
 describe("amazon",()=>{
     it("all items",()=>{
         cy.visit('https://www.amazon.in/')
-        cy.get('.hm-icon-label').contains('All').click()
-        cy.get('.category-section').find('ul li').each(($e1,index,list)=>{
+        cy.get('.hm-icon-label ').contains('All').click()
+        cy.get('.category-section ul li').each(($e1,index,list)=>{
             const item = $e1.find('.hmenu-item').text()
             if(item.includes("Men's Fashion")){
                 cy.wrap($e1).click()
             }
+            
         })
+        
+       
     })
 })
 
