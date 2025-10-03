@@ -2,5 +2,9 @@
   "standard" : {
   "username" : "standard_user" ,
   "password" : "secret_sauce"
-}  
+},  
+  "ecomm":{
+            "username":"rahulshettyacademy",
+            "password":"learning"
+  }
 }

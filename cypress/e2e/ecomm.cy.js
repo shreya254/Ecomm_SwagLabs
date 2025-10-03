@@ -1,8 +1,11 @@
 describe('ecomm',()=>{
-    it('testcase',()=>{
+    before(function(){
+        cy.fixture('users').as('userData')
+    })
+    it('testcase',function(){
         cy.visit('https://rahulshettyacademy.com/loginpagePractise/')
-        cy.get('#username').type("rahulshettyacademy")
-        cy.get('#password').type('learning')
+        cy.get('#username').type(this.userData.ecomm.username)
+        cy.get('#password').type(this.userData.ecomm.password)
         cy.contains('Sign In').click()
         cy.contains('Shop Name').should('be.visible')
         cy.get('app-card').should('have.length',4)
